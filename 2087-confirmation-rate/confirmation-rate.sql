@@ -1,15 +1,10 @@
-SELECT
-    s.user_id,
-    ROUND(
-        IFNULL(
-            SUM(CASE
+SELECT s.user_id,
+    ROUND(IFNULL(SUM(CASE
                 WHEN c.action = 'confirmed' THEN 1
                 ELSE 0
             END) / COUNT(c.action),
             0
-        ),
-        2
-    ) AS confirmation_rate
+        ),2) AS confirmation_rate
 
 FROM Signups AS s
 LEFT JOIN Confirmations AS c
